@@ -11,21 +11,19 @@ variable "deploy_location" {
 }
 
 variable "environment" {
-  description = "Location for deploying"
+  description = "Name of the environemnt"
   type        = string
   default     = ""
 }
-
 
 variable "department" {
-  description = "Location for deploying"
+  description = "department for deploying"
   type        = string
   default     = ""
 }
 
-
 variable "app_source" {
-  description = "Location for deploying"
+  description = "source that deploy this resource"
   type        = string
   default     = ""
 }

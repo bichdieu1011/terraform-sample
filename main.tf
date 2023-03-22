@@ -37,3 +37,15 @@ module "webapplication" {
   app_source      = var.app_source
   depends_on      = [module.resource-group]
 }
+
+module "storagAccount" {
+  source          = "./modules/storage-account"
+  resource_group  = var.resource_group
+  deploy_location = var.deploy_location
+  environment     = var.environment
+  department      = var.department
+  app_source      = var.app_source  
+  storage_account_replication_type = var.storage_account_replication_type
+  storage_account_tier = var.storage_account_tier
+  depends_on      = [module.resource-group]
+}

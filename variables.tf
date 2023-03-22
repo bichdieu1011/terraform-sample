@@ -11,19 +11,19 @@ variable "deploy_location" {
 }
 
 variable "environment" {
-  description = "Location for deploying"
+  description = "Name of the environemnt"
   type        = string
   default     = ""
 }
 
 variable "department" {
-  description = "Location for deploying"
+  description = "department for deploying"
   type        = string
   default     = ""
 }
 
 variable "app_source" {
-  description = "Location for deploying"
+  description = "source that deploy this resource"
   type        = string
   default     = ""
 }
@@ -31,14 +31,14 @@ variable "app_source" {
 
 
 variable "storage_account_tier" {
-  description = "Location for deploying"
+  description = "Account Tier of the storage account, it could be Standard, Premium"
   type        = string
   default     = ""
 }
 
 
 variable "storage_account_replication_type" {
-  description = "Location for deploying"
+  description = "Storage account relication type, it could be LRS, ZRS, GRS or RA-GRS"
   type        = string
   default     = ""
 }

@@ -1,4 +1,4 @@
-resource "terraform_storage" "terraform_files" {
+resource "azurerm_storage_account" "terraform_files" {
   name                     = "terraformstoredfiles"
   resource_group_name      = var.resource_group
   location                 = var.deploy_location
@@ -10,4 +10,10 @@ resource "terraform_storage" "terraform_files" {
     department = var.department
     source  = var.app_source
   }
+}
+
+resource "azurerm_storage_container" "terraform_files" {
+  name                  = "terraformcontainer"
+  storage_account_name  = azurerm_storage_account.terraform_files.name
+  container_access_type = "private"
 }
