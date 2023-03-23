@@ -28,6 +28,18 @@ module "resource-group" {
   deploy_location = var.deploy_location
 }
 
+module "applicationinsights" {
+  source          = "./modules/application-insights"
+  resource_group  = var.resource_group
+  deploy_location = var.deploy_location
+  depends_on      = [module.resource-group]
+}
+
+module "app_register"{
+  source = "./modules/application-register"  
+  depends_on      = [module.resource-group]
+}
+
 module "webapplication" {
   source          = "./modules/web-application"
   resource_group  = var.resource_group
@@ -35,7 +47,9 @@ module "webapplication" {
   environment     = var.environment
   department      = var.department
   app_source      = var.app_source
-  depends_on      = [module.resource-group]
+  client_id = module.app_register.client_id
+  application_insight_connection_string = module.applicationinsights.connection_string
+  depends_on      = [module.resource-group,  module.applicationinsights, module.app_register]
 }
 
 module "storagAccount" {
