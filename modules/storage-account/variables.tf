@@ -28,8 +28,6 @@ variable "app_source" {
   default     = ""
 }
 
-
-
 variable "storage_account_tier" {
   description = "Account Tier of the storage account, it could be Standard, Premium"
   type        = string

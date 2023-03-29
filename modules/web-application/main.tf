@@ -7,6 +7,16 @@ locals {
   }
   app_settings = {
     APPLICATIONINSIGHTS_CONNECTION_STRING = var.application_insight_connection_string
+     
+    WEBSITE_NODE_DEFAULT_VERSION = "12.16.1"
+    AAD_ENABLED                  = "true"
+    AAD_CLIENT_ID                = var.client_id
+    AAD_ISSUER_URL               = "https://login.microsoftonline.com/common/v2.0"
+    AAD_METADATA_URL             = "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration"
+    AAD_REDIRECT_URI             = "https://terraform-web-service.azurewebsites.net/.auth/login/aad/callback"
+    AAD_SCOPES                   = "openid profile email"
+    # WEBSITE_AUTH_DEFAULT_PROVIDER= "AzureActiveDirectory"
+  
   }
   
 }
@@ -32,21 +42,4 @@ resource "azurerm_windows_web_app" "teraformwebservice" {
   }
 
   app_settings =    local.app_settings
-
-
-  auth_settings_v2 {
-    auth_enabled = true
-    require_authentication = true
-    unauthenticated_action = "RedirectToLoginPage"
-    
-    login {
-    }
-
-    active_directory_v2  {
-      client_id = var.client_id
-      tenant_auth_endpoint = "https://login.microsoftonline.com/common/v2.0"
-      client_secret_setting_name = "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET"
-    }
-  }
-
 }
